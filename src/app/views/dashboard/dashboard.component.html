@@ -1,9 +1,10 @@
+<button class="btn_logout" (click)="logout()">Logout</button>
 <div class="container">
-  <div class="input_group mb-3 ">
+  <div class="input_group ">
     <div class="new_user">
       <Button type="button" class="btn" (click)="openModal(template)"><i class="bi bi-plus"> Novo Usuário</i></Button>
     </div>
-    <input type="search" class="form-control" placeholder="Search">
+    <!-- <input type="search" class="form-control" placeholder="Search">-->
   </div>
   <div class="card">
     <table class="table table-striped">
@@ -21,9 +22,9 @@
           <td class="text-center">Larry</td>
           <td class="text-center">the Bird</td>
           <td class="text-center">
-            <div >
-              <a class="btn-icons" ><i class="bi bi-pencil" style="color: black;"></i></a>
-              <a class="btn-icons" ><i class="bi bi-trash" style="color: red;"></i></a>
+            <div>
+              <a class="btn-icons"><i class="bi bi-pencil" style="color: black;"></i></a>
+              <a class="btn-icons"><i class="bi bi-trash" style="color: red;"></i></a>
             </div>
           </td>
         </tr>
@@ -32,7 +33,7 @@
   </div>
 
   <ng-template #template>
-    <form [formGroup]="cepForm" >
+    <form >
       <div class="modal-header">
         <h4 class="modal-title pull-left">Novo Cliente</h4>
         <button type="button" class="close pull-right btn" aria-label="Close" (click)="modalRef?.hide()">
@@ -40,48 +41,32 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form [formGroup]="cepForm" (submit)="onSubmit()" class="form_container">
           <div class="form-group">
-            <input type="text" class="form-control" required placeholder="Name">
+            <input type="text" name="full_name" id="full_name" formControlName="full_name" class="form-control" placeholder="Nome" required>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control"  required placeholder="Telefone">
+            <input type="text" class="form-control" name="phone" id="phone" formControlName="phone" required placeholder="Telefone">
           </div>
           <div class="form-group">
-  <div class="card-title">
-  <div class="" class="form-group">
-    <form >
+            <input type="text" class="form-control" name="district" id="district" formControlName="district" required placeholder="Bairro">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" name="street" id="street" formControlName="street" required placeholder="Rua">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" name="description" id="description" formControlName="description"  required placeholder="Descição">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" required placeholder="Localidade">
+          </div>
 
-      <div class="form-group">
-        <input type='button' id='cep' class="form-control" #ceps  placeholder='Cep'>
-      </div>
-      <div class="card-footer">
-        <button class="btn btn-success" title='"Procurar' (click)="findByCep('')">Procurar</button>
-      </div>
-    </form>
-  </div>
 
 
-    </div>
-      <table class="table table-striped"  width='100%'>
-        <tr>
-          <th class="text-center">Nome</th>
-          <th class="text-center">Endereço</th>
-          <th class="text-center">Telefone</th>
-
-        </tr>
-        <tr >
-          <td class="text-center">dvef</td>
-          <td class="text-center">da </td>
-          <td class="text-center">dfc fc</td>
-
-        </tr>
-      </table>
-  </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class=" btn-success">Adicionar</button>
+        <button type="submit" class=" btn-success">Adicionar</button>
       </div>
     </form>
 

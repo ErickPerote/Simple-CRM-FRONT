@@ -1,9 +1,10 @@
+import { RegisterClientService } from './../../services/RegisterCliente.service';
 import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
-import { ICep } from 'src/app/interface/Cep';
-import { CEPService } from 'src/app/services/cep.service';
+import { LocalizationService } from 'src/app/services/Loalization.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,7 +15,8 @@ export class DashboardComponent implements OnInit {
   public modalRef?: BsModalRef;
 
   cepForm = new FormGroup({
-    cep: new FormControl(),
+    full_name: new FormControl(),
+    email: new FormControl(),
     street: new FormControl(),
     district: new FormControl(),
     locality: new FormControl(),
@@ -22,34 +24,43 @@ export class DashboardComponent implements OnInit {
     phone: new FormControl()
   })
 
+  ceps?: string
 
-    constructor(private cepService: CEPService, private modalService: BsModalService, public route: Router, ) { }
+  constructor(
+    private LocalizationService: LocalizationService,
+    private modalService: BsModalService,
+    public route: Router,
+    private authService: AuthenticationService,
+    private registerClientService: RegisterClientService,
+    ) { }
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
  }
 
   async ngOnInit() {
-    await this.findByCep('')
-
   }
 
- /* public async onSubmit(): Promise<void>{
+
+  async onSubmit() {
     if(this.cepForm.valid) {
       try {
-        let response = await this.cepService.informationsCep(this.cepForm.value)
-        this.cepService.informationsCep(response)
-        this.route.navigate(['/dashboard'])
+        this.registerClientService.createClient(this.cepForm.value)
+        this.route.navigate(["/dashboard"])
       } catch (error) {
-        console.log(error)
+
       }
     }
-  }*/
+  }
 
    async findByCep(cep: string): Promise<void> {
-    await this.cepService.findByCep(cep)
+    await this.LocalizationService.findByCep(cep)
     console.log(cep)
+  }
 
-}
+  logout() {
+    this.authService.logout()
+    this.route.navigate([""])
+  }
 
 }
