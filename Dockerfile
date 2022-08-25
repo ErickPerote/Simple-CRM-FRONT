@@ -1,8 +1,12 @@
 #stage 1
-FROM node:latest as node
+FROM node:16.17.0 as node
 WORKDIR /simpleCRM-Front
-COPY . .
+COPY package.json ./
+
+RUN npm cache clean --force
 RUN npm install
+
+COPY . .
 RUN npm run build --prod
 
 #stage 2
