@@ -1,0 +1,59 @@
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 10rem;
+}
+
+.input_group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center
+  ;
+  width: 100%;
+}
+
+.form-control {
+  width: 55%;
+}
+
+.card {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn {
+  border: none;
+  background-color: transparent;
+}
+
+.table {
+  width: 100%;
+}
+
+.new_user {
+  justify-content: center;
+  align-items: center;
+}
+
+.form-group {
+  width: 80%;
+  margin-bottom: 1rem;
+}
+
+.btn-icons {
+  background-color: transparent;
+}
+
+.bi {
+  font-size: 18px;
+  padding: 10px;
+}
+
+
+.btn-success {
+  background-color: green;
+}

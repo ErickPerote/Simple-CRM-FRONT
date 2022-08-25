@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="input_group mb-3 ">
+    <div class="new_user">
+      <Button type="button" class="btn" (click)="openModal(template)"><i class="bi bi-plus"> Novo Usuário</i></Button>
+    </div>
+    <input type="search" class="form-control" placeholder="Search">
+  </div>
+  <div class="card">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="text-center">#</th>
+          <th class="text-center">First</th>
+          <th class="text-center">Last</th>
+          <th class="text-center"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th class="text-center">3</th>
+          <td class="text-center">Larry</td>
+          <td class="text-center">the Bird</td>
+          <td class="text-center">
+            <div >
+              <a class="btn-icons" ><i class="bi bi-pencil" style="color: black;"></i></a>
+              <a class="btn-icons" ><i class="bi bi-trash" style="color: red;"></i></a>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #template>
+    <form [formGroup]="cepForm" >
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Novo Cliente</h4>
+        <button type="button" class="close pull-right btn" aria-label="Close" (click)="modalRef?.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <input type="text" class="form-control" required placeholder="Name">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control"  required placeholder="Telefone">
+          </div>
+          <div class="form-group">
+  <div class="card-title">
+  <div class="" class="form-group">
+    <form >
+
+      <div class="form-group">
+        <input type='button' id='cep' class="form-control" #ceps  placeholder='Cep'>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-success" title='"Procurar' (click)="findByCep('')">Procurar</button>
+      </div>
+    </form>
+  </div>
+
+
+    </div>
+      <table class="table table-striped"  width='100%'>
+        <tr>
+          <th class="text-center">Nome</th>
+          <th class="text-center">Endereço</th>
+          <th class="text-center">Telefone</th>
+
+        </tr>
+        <tr >
+          <td class="text-center">dvef</td>
+          <td class="text-center">da </td>
+          <td class="text-center">dfc fc</td>
+
+        </tr>
+      </table>
+  </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class=" btn-success">Adicionar</button>
+      </div>
+    </form>
+
+  </ng-template>
+
+</div>

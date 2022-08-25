@@ -1,0 +1,46 @@
+<div class="container-fluid">
+  <div class="row main-content text-center">
+    <div class="col-md-4 text-center company__info">
+      <span class="company__logo">
+        <img class="" src="../../../assets/image-removebg-preview (8).png" alt="" width="100%">
+      </span>
+      <h4 class="company_title mb-4">Simple CRM</h4>
+      <h4 class="company_title_footer">Simple-CRM is a simple to use and open source system.</h4>
+    </div>
+    <div class="col-md-8 col-xs-12 col-sm-12  login_form ">
+      <div class="container-fluid">
+        <div class="row">
+          <h2>Register</h2>
+        </div>
+        <div class="row">
+          <form  [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="form-group">
+            <div class="row">
+              <input type="text" name="firstName" id="firstName" formControlName="firstName" class="form__input" placeholder="First Name" required>
+            </div>
+            <div class="row">
+              <input type="text" name="lastName" formControlName="lastName" id="lastName" class="form__input" placeholder="Last Name" required>
+            </div>
+            <div class="row">
+              <input type="email" name="email" formControlName="email" id="email" class="form__input" placeholder="Email" required>
+            </div>
+            <div class="row">
+              <input type="password" name="password" id="password" formControlName="password" class="form__input" placeholder="Password" required>
+            </div>
+
+            <div class="row">
+              <p>Have Account? <a href=""> Login</a></p>
+            </div>
+
+            <div class="buttons_login">
+              <div class="row_btn">
+                <input type="submit" routerLink="/dashboard"  class="btn" value="Register">
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
