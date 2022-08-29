@@ -10,30 +10,23 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th class="text-center">#</th>
-          <th class="text-center">First</th>
-          <th class="text-center">Last</th>
-          <th class="text-center"></th>
+          <th class="text-center">Nome</th>
+          <th class="text-center">Bairro</th>
+          <th class="text-center">Rua</th>
+          <th class="text-center">Telefone</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th class="text-center">3</th>
-          <td class="text-center">Larry</td>
-          <td class="text-center">the Bird</td>
-          <td class="text-center">
-            <div>
-              <a class="btn-icons"><i class="bi bi-pencil" style="color: black;"></i></a>
-              <a class="btn-icons"><i class="bi bi-trash" style="color: red;"></i></a>
-            </div>
-          </td>
-        </tr>
+        <tr class="tr-click" *ngFor="let item of list" routerLink="/client/{{item.id}}">
+          <td class="text-center">{{item.full_name}}</td>
+          <td class="text-center">{{item.district}}</td>
+          <td class="text-center">{{item.street}}</td>
+          <td class="text-center">{{item.phone}}</td>
       </tbody>
     </table>
   </div>
 
   <ng-template #template>
-    <form >
       <div class="modal-header">
         <h4 class="modal-title pull-left">Novo Cliente</h4>
         <button type="button" class="close pull-right btn" aria-label="Close" (click)="modalRef?.hide()">
@@ -41,7 +34,10 @@
         </button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="cepForm" (submit)="onSubmit()" class="form_container">
+        <form [formGroup]="cepForm" (ngSubmit)="onSubmit()" class="form_container">
+          <div class="form-group">
+            <input type="text" name="email" id="email" formControlName="email" class="form-control" placeholder="Email" required>
+          </div>
           <div class="form-group">
             <input type="text" name="full_name" id="full_name" formControlName="full_name" class="form-control" placeholder="Nome" required>
           </div>
@@ -58,18 +54,16 @@
             <input type="text" class="form-control" name="description" id="description" formControlName="description"  required placeholder="Descição">
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" required placeholder="Localidade">
+            <input type="text" class="form-control" name="locality" id="locality" formControlName="locality"  required placeholder="UF">
           </div>
 
-
-
+          <div class="modal-footer">
+            <input type="submit" routerLink="/dashboard"  class="btn-success"  value="Register" (click)="modalRef?.hide()">
+          </div>
         </form>
       </div>
-      <div class="modal-footer">
-        <button type="submit" class=" btn-success">Adicionar</button>
-      </div>
-    </form>
-
   </ng-template>
+
+
 
 </div>

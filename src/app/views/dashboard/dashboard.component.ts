@@ -1,9 +1,9 @@
-import { RegisterClientService } from './../../services/RegisterCliente.service';
+import { ClientInterface } from './../../interface/Client';
+import { ClientService } from './../../services/Cliente.service';
 import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
-import { LocalizationService } from 'src/app/services/Loalization.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
@@ -23,44 +23,47 @@ export class DashboardComponent implements OnInit {
     description: new FormControl(),
     phone: new FormControl()
   })
-
-  ceps?: string
-
   constructor(
-    private LocalizationService: LocalizationService,
     private modalService: BsModalService,
     public route: Router,
     private authService: AuthenticationService,
-    private registerClientService: RegisterClientService,
-    ) { }
+    private ClientService: ClientService,
+  ) { }
+
+  list?: ClientInterface[]
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
- }
+  }
 
   async ngOnInit() {
+    this.list = await this.ClientService.list()
   }
-
 
   async onSubmit() {
-    if(this.cepForm.valid) {
+    if (this.cepForm.valid) {
       try {
-        this.registerClientService.createClient(this.cepForm.value)
+        await this.ClientService.createClient(this.cepForm.value)
         this.route.navigate(["/dashboard"])
       } catch (error) {
-
+        console.log(error)
       }
     }
+    await this.ngOnInit()
   }
 
-   async findByCep(cep: string): Promise<void> {
-    await this.LocalizationService.findByCep(cep)
-    console.log(cep)
+  alert() {
+    console.log('we')
   }
 
   logout() {
     this.authService.logout()
     this.route.navigate([""])
   }
-
 }
+
+
+/* async findByCep(cep: string): Promise<void> {
+  await this.LocalizationService.findByCep(cep)
+  console.log(cep)
+}*/

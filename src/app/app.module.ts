@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -9,6 +9,8 @@ import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
+import { HttpInterceptorService } from './config/http.Interceptor';
+import { ClientComponent } from './views/client/client.component';
 
 
 @NgModule({
@@ -16,7 +18,8 @@ import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
     AppComponent,
     DashboardComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ClientComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,12 @@ import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
     ReactiveFormsModule,
     ModalModule
   ],
-  providers: [BsModalService],
+  providers: [BsModalService,
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi   : true,
+    },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

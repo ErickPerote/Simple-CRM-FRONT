@@ -8,26 +8,29 @@ import { LoginInterface, TokenInterface } from '../interface/User';
 })
 export class AuthenticationService {
 
-
   constructor(public http: HttpClient) { }
 
-    public isAuthenticated(): boolean {
-      const token = localStorage.getItem('token');
-      return !!token
-    }
+  public isAuthenticated(): boolean {
+    const token = localStorage.getItem('access_token');
 
+    return !!token
+  }
 
   async login(user: LoginInterface) : Promise<TokenInterface> {
     return await firstValueFrom(this.http.post<TokenInterface>('http://localhost:3000/login', user))
   }
 
-
   storeToken(data: TokenInterface) {
-    localStorage.setItem('token', data.token);
+    localStorage.setItem('access_token', data.access_token);
   }
 
+  getToken() {
+    const token = localStorage.getItem('access_token');
+    return token
+  }
 
   logout() {
     localStorage.clear()
   }
+
 }

@@ -27,7 +27,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  async onSubmit(): Promise<void> {
+  async onSubmit() {
     if(this.registerForm.valid){
       try {
         let response = await this.registerService.createUser(this.registerForm.value)
