@@ -1,4 +1,5 @@
 export interface ClientInterface {
+  cep: string;
   id?: number;
   full_name: string;
   email: string,

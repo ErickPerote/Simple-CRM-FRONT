@@ -18,18 +18,10 @@ export class ClientComponent implements OnInit {
     street: '',
     district: '',
     locality: '',
-    phone: ''
+    phone: '',
+    cep: ''
   }
 
-  cepForm = new FormGroup({
-    full_name: new FormControl(),
-    email: new FormControl(),
-    street: new FormControl(),
-    district: new FormControl(),
-    locality: new FormControl(),
-    description: new FormControl(),
-    phone: new FormControl()
-  })
 
   constructor(
     private clientService: ClientService,

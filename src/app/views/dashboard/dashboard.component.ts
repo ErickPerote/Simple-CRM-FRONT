@@ -1,9 +1,11 @@
+import { CepInterface } from './../../interface/Cep';
+import { JsonPipe } from '@angular/common';
 import { ClientInterface } from './../../interface/Client';
 import { ClientService } from './../../services/Cliente.service';
 import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormControlName } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
@@ -17,11 +19,7 @@ export class DashboardComponent implements OnInit {
   cepForm = new FormGroup({
     full_name: new FormControl(),
     email: new FormControl(),
-    street: new FormControl(),
-    district: new FormControl(),
-    locality: new FormControl(),
     description: new FormControl(),
-    phone: new FormControl()
   })
   constructor(
     private modalService: BsModalService,
@@ -32,12 +30,12 @@ export class DashboardComponent implements OnInit {
 
   list?: ClientInterface[]
 
-  openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
-  }
-
   async ngOnInit() {
     this.list = await this.ClientService.list()
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
   }
 
   async onSubmit() {
@@ -52,18 +50,34 @@ export class DashboardComponent implements OnInit {
     await this.ngOnInit()
   }
 
-  alert() {
-    console.log('we')
-  }
-
   logout() {
     this.authService.logout()
     this.route.navigate([""])
   }
+
+  searchCep(cep: string) {
+    cep = cep.replace(/\D/g, '')
+    if(cep != '') {
+      const cepValid = /^[0-9]{8}$/;
+
+      if(cepValid.test(cep)) {
+        this.ClientService.cep(cep).then((data) => this.FormFunc(data, ''))
+      }else {
+        console.log('deu ruim')
+      }
+    }
+  }
+
+  FormFunc(data: string | any, form: any) {
+    form.setValue({
+      rua: data.rua,
+      bairro: data.bairro,
+      UF: data.localidade,
+      ddd: data.ddd,
+      cep: data.cep
+    })
+
+  }
+
 }
 
-
-/* async findByCep(cep: string): Promise<void> {
-  await this.LocalizationService.findByCep(cep)
-  console.log(cep)
-}*/
