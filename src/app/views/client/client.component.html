@@ -4,7 +4,7 @@
     <div class="modal-header">
       <h4 class="modal-title pull-left">Cliente: {{client.full_name}}</h4>
     </div>
-    <form class="modal-body" (ngSubmit)="updateClient()">
+    <form class="modal-body" [formGroup]="cepForm" (ngSubmit)="updateClient()">
       <div class=" form_container">
         <div class="form-group">
           <label for="exampleInputEmail1" class="mb-2">Email</label>
