@@ -22,7 +22,7 @@ export class ClientComponent implements OnInit {
     cep: ''
   }
 
-  cepForm = new FormGroup({
+  Form = new FormGroup({
     full_name: new FormControl(),
     email: new FormControl(),
     street: new FormControl(),
@@ -47,7 +47,6 @@ export class ClientComponent implements OnInit {
     await this.clientService.deleteClient(client.id);
     this.routeUrl.navigate(['dashboard'])
   }
-
 
   async updateClient(): Promise<void> {
     let id = this.route.snapshot.params['id']

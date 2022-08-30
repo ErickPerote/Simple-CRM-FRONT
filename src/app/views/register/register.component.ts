@@ -18,6 +18,9 @@ export class RegisterComponent implements OnInit {
     password: new FormControl(),
   });
 
+  emailIsValid: boolean = false
+  email: boolean = false
+
   constructor(
     private registerService: RegisterService,
     private authService: AuthenticationService,
@@ -36,7 +39,9 @@ export class RegisterComponent implements OnInit {
       } catch(error) {
         console.log(error)
       }
-
+      
+    }if(!this.registerForm.valid){
+      this.emailIsValid = true
     }
   }
 }

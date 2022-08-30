@@ -11,6 +11,7 @@ import { RegisterComponent } from './views/register/register.component';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 import { HttpInterceptorService } from './config/http.Interceptor';
 import { ClientComponent } from './views/client/client.component';
+import { ClientEditModalComponent } from './components/client-edit-modal/client-edit-modal.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ClientComponent } from './views/client/client.component';
     DashboardComponent,
     LoginComponent,
     RegisterComponent,
-    ClientComponent
+    ClientComponent,
+    ClientEditModalComponent
   ],
   imports: [
     BrowserModule,

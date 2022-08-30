@@ -5,6 +5,10 @@
 	margin: 8em auto;
 	display: flex;
 }
+.alert {
+	width: 80%;
+}
+
 .company__info{
 	background-color: #000;
 	border-top-left-radius: 20px;
@@ -42,9 +46,16 @@
 	.main-content{width: 70%;}
 }
 .row > h2{
-  margin-top: 8rem;
+  	margin-top: 8rem;
 	color:#000;
 }
+
+.row_logged{
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
 .login_form{
 	background-color: #fff;
 	border-top-right-radius:20px;
@@ -56,12 +67,8 @@ form{
 	padding: 0 2em;
 }
 
-.form-group {
-  padding: 2.5rem;
-}
-
 .form__input{
-	width: 100%;
+	width: 80%;
 	border:0px solid transparent;
 	border-radius: 0;
 	border-bottom: 1px solid #aaa;

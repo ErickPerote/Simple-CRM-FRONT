@@ -1,9 +1,8 @@
-import { CepInterface } from './../interface/Cep';
 import { ClientInterface } from './../interface/Client';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs/internal/firstValueFrom';
-
+import { CepInterface } from './../interface/Cep'; 
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +12,6 @@ export class ClientService {
   constructor(public http: HttpClient) { }
 
   url = 'http://localhost:3000/'
-  json?: CepInterface[]
 
   public async list(): Promise<ClientInterface[]> {
     return firstValueFrom(this.http.get<ClientInterface[]>(`${this.url}client`))
@@ -31,17 +29,15 @@ export class ClientService {
     return firstValueFrom(this.http.delete(`${this.url}client/` + id))
   }
 
-  async updateClient(editClient: ClientInterface, id: number) {
+  async updateClient(editClient: ClientInterface, id?: number) {
     console.log(`${this.url}client/${id}`)
     return firstValueFrom(this.http.put<ClientInterface>(`${this.url}client/` + id, editClient))
   }
 
-  async cep(cep: string) {
-    return fetch(`https://viacep.com.br/ws/${cep}/json`).then(res => res.json())
-      .then(jsonData => {
-        this.json = jsonData;
-        console.log(jsonData)
-      });
+  async cep(cep: number) {
+    return fetch("https://viacep.com.br/ws/60346163/json", { method: 'GET', redirect: 'follow' })
+    .then((response) => response.json())
+    .then((data: CepInterface) => data)
   }
 
 

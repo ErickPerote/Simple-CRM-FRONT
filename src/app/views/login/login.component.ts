@@ -15,6 +15,8 @@ export class LoginComponent implements OnInit {
     password: new FormControl(),
   });
 
+  isFailed: boolean = false
+
   constructor(private authService: AuthenticationService, public route: Router) { }
 
   ngOnInit(): void {
@@ -27,7 +29,7 @@ export class LoginComponent implements OnInit {
         this.authService.storeToken(response);
         this.route.navigate(["/dashboard"])
       } catch (error) {
-
+        this.isFailed = true
       }
     }
   }

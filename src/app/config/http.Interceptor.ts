@@ -2,6 +2,7 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/c
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from '../services/authentication.service';
+import { HttpHeaders } from '@angular/common/http';
 
 
 
@@ -13,13 +14,13 @@ export class HttpInterceptorService implements HttpInterceptor {
 
   constructor(private authService: AuthenticationService) {}
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
     if(req.url){
     req = req.clone({
       setHeaders: {
         'Content-Type' : 'application/json; charset=utf-8',
         'Accept'       : 'application/json',
         'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Content-Type',
         'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
         'Authorization': `Bearer ${this.authService.getToken()}`,
       },

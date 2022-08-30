@@ -12,6 +12,10 @@
         <div class="row">
           <h2>Register</h2>
         </div>
+
+        <div *ngIf="emailIsValid" class="alert alert-danger" role="alert">
+          Email inválido ou já existente
+        </div>
         <div class="row">
           <form  [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="form-group">
             <div class="row">

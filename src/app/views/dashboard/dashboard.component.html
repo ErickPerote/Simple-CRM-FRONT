@@ -14,59 +14,73 @@
           <th class="text-center">Bairro</th>
           <th class="text-center">Rua</th>
           <th class="text-center">Telefone</th>
+          <th class="text-center"></th>
         </tr>
       </thead>
       <tbody>
-        <tr class="tr-click" *ngFor="let item of list" routerLink="/client/{{item.id}}">
+        <tr class="tr-click" *ngFor="let item of list">
           <td class="text-center">{{item.full_name}}</td>
           <td class="text-center">{{item.district}}</td>
           <td class="text-center">{{item.street}}</td>
-          <td class="text-center">{{item.phone}}</td>
+          <td class="text-center">{{item.phone}}</td>          
+          <td class="text-center">
+            <div>
+              <a class="btn-icons" (click)="openEditModel(item)" ><i class="bi bi-pencil" style="color: black;"></i></a>
+              <a class="btn-icons"><i class="bi bi-trash" style="color: red;"></i></a>
+            </div>
+          </td>
+
       </tbody>
     </table>
   </div>
 
   <ng-template #template>
-      <div class="modal-header">
-        <h4 class="modal-title pull-left">Novo Cliente</h4>
-        <button type="button" class="close pull-right btn" aria-label="Close" (click)="modalRef?.hide()">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="modal-body" ngModel #cep="ngModel">
-        <form #f="ngForm" [formGroup]="cepForm" (ngSubmit)="onSubmit()" class="form_container"  >
-          <div class="form-group">
-            <input type="text" name="email" id="email" formControlName="email" class="form-control" placeholder="Email" required>
-          </div>
-          <div class="form-group">
-            <input type="text" name="full_name" id="full_name" formControlName="full_name" class="form-control" placeholder="Nome" required>
-          </div>
-          <div class="form-group" >
-            <input type="text" name="cep" id="cep" class="form-control" ngModel #cep="ngModel" (blur)="FormFunc($any($event.target).value, f)"   placeholder="Cep" required>
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" name="phone" id="phone" ngModel #ddd="ngModel" required placeholder="Telefone">
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" name="district" id="district" ngModel #bairro="ngModel" required placeholder="Bairro">
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" name="street" id="street" ngModel #rua="ngModel" required placeholder="Rua">
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" name="locality" id="locality" ngModel #localidade="ngModel" required placeholder="Localidade">
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" name="description" id="description" formControlName="description"  required placeholder="Descição">
-          </div>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Novo Cliente</h4>
+      <button type="button" class="close pull-right btn" aria-label="Close" (click)="modalRef?.hide()">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div *ngIf="formValid" class="alert alert-danger" role="alert">
+      Por favor preencher todos os campos.
+    </div>
+    <div class="modal-body">
+      <div class="form-center">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form_container">
+        <div class="form-group">
+          <input type="text" name="email" id="email" formControlName="email" class="form-control" placeholder="Email"
+            required>
+        </div>
+        <div class="form-group">
+          <input type="text" name="full_name" id="full_name" formControlName="full_name" class="form-control"
+            placeholder="Nome" required>
+        </div>
+        <div class="form-group">
+          <input type="number" name="zipCode" id="zipCode" formControlName="zipCode"   [ngModel]="zipCode" (ngModelChange)="findZipCode($event)" class="form-control" placeholder="Cep" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="phone" formControlName="phone" id="phone" [ngModel]="phone" required placeholder="Telefone">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="district" formControlName="district" id="district" [ngModel]="district" required placeholder="Bairro">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="street" formControlName="street" id="street" [ngModel]="street" required placeholder="Rua">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="locality" formControlName="locality" id="locality" [ngModel]="locality" required placeholder="Localidade">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="description" id="description" formControlName="description"
+            required placeholder="Descição">
+        </div>
+        <div class="">
+          <input type="submit" routerLink="/dashboard" class="btn-success" value="Register">
+        </div>
+      </form>
+    </div>
 
-          <div class="modal-footer">
-            <input type="submit" routerLink="/dashboard"  class="btn-success"  value="Register" (click)="modalRef?.hide()">
-          </div>
-        </form>
-      </div>
+    </div>
   </ng-template>
-
-
 
 </div>
