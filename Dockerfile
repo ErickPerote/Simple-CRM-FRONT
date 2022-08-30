@@ -11,6 +11,8 @@ RUN npm run build --prod
 
 #stage 2
 FROM nginx:alpine
+
+COPY nginx.conf /etc/nginx/nginx.conf
 COPY --from=node /simpleCRM-Front/dist/simple-crm-front /usr/share/nginx/html
 
 # Expose port 80
