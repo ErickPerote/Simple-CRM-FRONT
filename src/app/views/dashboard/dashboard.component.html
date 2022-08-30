@@ -33,28 +33,31 @@
           <span aria-hidden="true">×</span>
         </button>
       </div>
-      <div class="modal-body">
-        <form [formGroup]="cepForm" (ngSubmit)="onSubmit()" class="form_container">
+      <div class="modal-body" ngModel #cep="ngModel">
+        <form #f="ngForm" [formGroup]="cepForm" (ngSubmit)="onSubmit()" class="form_container"  >
           <div class="form-group">
             <input type="text" name="email" id="email" formControlName="email" class="form-control" placeholder="Email" required>
           </div>
           <div class="form-group">
             <input type="text" name="full_name" id="full_name" formControlName="full_name" class="form-control" placeholder="Nome" required>
           </div>
-          <div class="form-group">
-            <input type="text" class="form-control" name="phone" id="phone" formControlName="phone" required placeholder="Telefone">
+          <div class="form-group" >
+            <input type="text" name="cep" id="cep" class="form-control" ngModel #cep="ngModel" (blur)="FormFunc($any($event.target).value, f)"   placeholder="Cep" required>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" name="district" id="district" formControlName="district" required placeholder="Bairro">
+            <input type="text" class="form-control" name="phone" id="phone" ngModel #ddd="ngModel" required placeholder="Telefone">
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" name="street" id="street" formControlName="street" required placeholder="Rua">
+            <input type="text" class="form-control" name="district" id="district" ngModel #bairro="ngModel" required placeholder="Bairro">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" name="street" id="street" ngModel #rua="ngModel" required placeholder="Rua">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" name="locality" id="locality" ngModel #localidade="ngModel" required placeholder="Localidade">
           </div>
           <div class="form-group">
             <input type="text" class="form-control" name="description" id="description" formControlName="description"  required placeholder="Descição">
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" name="locality" id="locality" formControlName="locality"  required placeholder="UF">
           </div>
 
           <div class="modal-footer">

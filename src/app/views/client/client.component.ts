@@ -18,7 +18,8 @@ export class ClientComponent implements OnInit {
     street: '',
     district: '',
     locality: '',
-    phone: ''
+    phone: '',
+    cep: ''
   }
 
   cepForm = new FormGroup({
