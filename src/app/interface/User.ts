@@ -11,6 +11,6 @@ export interface RegisterInterface {
 }
 
 export interface TokenInterface {
-  expirationTime: number,
+  expiresIn: Date,
   access_token: string
 }

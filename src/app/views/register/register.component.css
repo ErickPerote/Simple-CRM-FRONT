@@ -1,5 +1,9 @@
+.container-fluid {
+  background-color: #d9d9d9;
+}
+
 .main-content{
-	width: 80%;
+	width: 55%;
 	border-radius: 20px;
 	box-shadow: 0 5px 5px rgba(0,0,0,.4);
 	margin: 8em auto;
@@ -28,7 +32,7 @@
   margin-top: 4rem;
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 840px) {
 	.main-content{width: 90%;}
 	.company__info{
 		display: none;
@@ -42,7 +46,7 @@
 	.main-content{width: 70%;}
 }
 .row > h2{
-  margin-top: 5rem;
+  margin-top: 2rem;
 	color:#000;
 }
 .login_form{
@@ -57,11 +61,11 @@ form{
 }
 
 .form-group {
-  padding: 2.5rem;
+  padding: 1rem;
 }
 
 .form__input{
-	width: 100%;
+	width: 85%;
 	border:0px solid transparent;
 	border-radius: 0;
 	border-bottom: 1px solid #aaa;
@@ -85,7 +89,7 @@ form{
   color: #fff;
 	border: 1px solid #2e2e2e;
 	margin-top: 1.5em;
-	margin-bottom: 3em;
+	margin-bottom: 1em;
 }
 
 .row_btn {

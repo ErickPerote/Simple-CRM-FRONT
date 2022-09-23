@@ -7,12 +7,12 @@ import { LoginInterface, TokenInterface } from '../interface/User';
   providedIn: 'root'
 })
 export class AuthenticationService {
+  jwtHelper: any;
 
   constructor(public http: HttpClient) { }
 
   public isAuthenticated(): boolean {
     const token = localStorage.getItem('access_token');
-
     return !!token
   }
 
@@ -20,7 +20,7 @@ export class AuthenticationService {
     return await firstValueFrom(this.http.post<TokenInterface>('http://localhost:3000/login', user))
   }
 
-  storeToken(data: TokenInterface) {
+  storeToken(data: TokenInterface ) {
     localStorage.setItem('access_token', data.access_token);
   }
 

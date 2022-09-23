@@ -1,6 +1,6 @@
 export interface CepInterface {
   bairro: string
-  cep: string
+  zip_code: number
   complemento: string
   ddd: string
   gia: string

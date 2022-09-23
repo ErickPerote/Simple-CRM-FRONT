@@ -11,47 +11,14 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class ClientComponent implements OnInit {
 
-  client: ClientInterface ={
-    description: '',
-    email: '',
-    full_name: '',
-    street: '',
-    district: '',
-    locality: '',
-    phone: '',
-    cep: ''
-  }
 
-  Form = new FormGroup({
-    full_name: new FormControl(),
-    email: new FormControl(),
-    street: new FormControl(),
-    district: new FormControl(),
-    locality: new FormControl(),
-    description: new FormControl(),
-    phone: new FormControl()
-  })
 
   constructor(
-    private clientService: ClientService,
-    private route: ActivatedRoute,
-    private routeUrl: Router
+
     ) { }
 
   async ngOnInit() {
-    let id = this.route.snapshot.params['id']
-    this.client = await this.clientService.readById(id)
   }
 
-  async deleteClient(client: ClientInterface | any) {
-    await this.clientService.deleteClient(client.id);
-    this.routeUrl.navigate(['dashboard'])
-  }
-
-  async updateClient(): Promise<void> {
-    let id = this.route.snapshot.params['id']
-    await this.clientService.updateClient(this.client, id);
-    this.routeUrl.navigate(['dashboard'])
-  }
 
 }

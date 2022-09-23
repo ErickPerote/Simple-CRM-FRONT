@@ -12,6 +12,7 @@ import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 import { HttpInterceptorService } from './config/http.Interceptor';
 import { ClientComponent } from './views/client/client.component';
 import { ClientEditModalComponent } from './components/client-edit-modal/client-edit-modal.component';
+import { ClientCreateModalComponent } from './components/client-create-modal/client-create-modal.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { ClientEditModalComponent } from './components/client-edit-modal/client-
     LoginComponent,
     RegisterComponent,
     ClientComponent,
-    ClientEditModalComponent
+    ClientEditModalComponent,
+    ClientCreateModalComponent
   ],
   imports: [
     BrowserModule,

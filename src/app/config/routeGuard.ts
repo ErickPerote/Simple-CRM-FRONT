@@ -12,12 +12,13 @@ export class RouteGuard implements CanActivate {
 
     let isValid = this.authService.isAuthenticated()
 
-    if (isValid) {
-      return true
+    if (!isValid) {
+      this.router.navigate([''])
+      return false
     }
-    this.router.navigate([''])
-    return false;
+    console.log('ok')
 
+    return true;
   }
 
 }

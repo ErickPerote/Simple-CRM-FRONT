@@ -2,44 +2,73 @@
 
     <div class="card">
       <div class="modal-header">
-        <h4 class="modal-title pull-left">Cliente: {{client.full_name}}</h4>
+        <h4 class="modal-title pull-left">Atualizar Cliente</h4>
+        <button type="button" class="close pull-right btn" aria-label="Close" (click)="modalRef?.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
       </div>
       <form class="modal-body"  (ngSubmit)="updateClient()">
         <div class=" form_container">
-          <div class="form-group">
-            <label for="exampleInputEmail1" class="mb-2">Email</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" name="email" [(ngModel)]="client.email" placeholder="Email">
+          <div class="form-group row  mt-2">
+            <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control" name="email" [(ngModel)]="client.email" id="inputEmail" placeholder="Email">
+            </div>
           </div>
-          <div class="form-group">
-            <label for="full_name" class="mb-2">Email</label>
-            <input type="text" class="form-control" id="full_name" name="full_name" [(ngModel)]="client.full_name" placeholder="Nome"   >
+
+          <div class="form-group row mt-4">
+            <label for="inputNome" class="col-sm-2 col-form-label">Nome</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name="full_name" [(ngModel)]="client.full_name" id="inputNome" placeholder="Nome">
+            </div>
           </div>
-          <div class="form-group">
-            <label for="phone" class="mb-2">Telefone</label>
-            <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="client.phone" placeholder="Telefone">
+
+          <div class="form-group row mt-4">
+            <label for="inputCep" class="col-sm-2 col-form-label">Cep</label>
+            <div class="col-sm-10">
+              <input type="number" name="zip_code" id="inputCep"  [ngModel]="zip_code" (ngModelChange)="findZipCode($event)" class="form-control" placeholder="Cep">
+            </div>
           </div>
-          <div class="form-group">
-            <label for="district" class="mb-2">Bairro</label>
-            <input type="text" class="form-control" name="district" id="district" [(ngModel)]="client.district" placeholder="Bairro">
+
+          <div class="form-group row mt-4">
+            <label for="inputPhone" class="col-sm-2 col-form-label">Telefone</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name="phone" [ngModel]="phone"  id="inputPhone" placeholder="Telefone">
+            </div>
           </div>
-          <div class="form-group">
-            <label for="street" class="mb-2">Rua</label>
-            <input type="text" class="form-control" name="street" id="street" [(ngModel)]="client.street" placeholder="Rua">
+
+          <div class="form-group row mt-4">
+            <label for="inputBairro" class="col-sm-2 col-form-label">Bairro</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name="district"  [ngModel]="district" id="inputBairro" placeholder="Bairro">
+            </div>
           </div>
-          <div class="form-group">
-            <label for="description" class="mb-2">Descrição</label>
-            <input type="text" class="form-control" name="description" id="description"  [(ngModel)]="client.description" placeholder="Descição">
+
+          <div class="form-group row mt-4">
+            <label for="inputRua" class="col-sm-2 col-form-label">Rua</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name="street"   [ngModel]="street"  id="inputRua" placeholder="Rua">
+            </div>
           </div>
-          <div class="form-group">
-            <label for="locality" class="mb-2 ">UF</label>
-            <input type="text" class="form-control" name="locality" id="locality"  [(ngModel)]="client.locality" placeholder="UF">
+
+          <div class="form-group row mt-4">
+            <label for="inputUF" class="col-sm-2 col-form-label">UF</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name="locality" [ngModel]="locality" id="inputUF" placeholder="UF">
+            </div>
           </div>
-  
+
+          <div class="form-group row mt-4">
+            <label for="inputDescição" class="col-sm-2 col-form-label">Descição</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name="description" [(ngModel)]="client.description" id="inputDescição" placeholder="Descição">
+            </div>
+          </div>
+
           <div class="modal-footer">
-            <button  class="btn-success" type="submit">Atualizar</button>
+            <button  class="btn btn-success" type="submit">Atualizar</button>
           </div>
         </div>
       </form>
     </div>
   </div>
-  

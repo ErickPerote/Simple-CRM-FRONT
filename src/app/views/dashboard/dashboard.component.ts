@@ -1,13 +1,11 @@
-import { CepInterface } from './../../interface/Cep';
+import { ClientCreateModalComponent } from './../../components/client-create-modal/client-create-modal.component';
 import { ClientInterface } from './../../interface/Client';
 import { ClientService } from './../../services/Cliente.service';
-import { Component, Input, OnInit, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { ActivatedRoute, Router, RouterLinkActive } from '@angular/router';
-import { FormGroup, FormControl, FormControlName, Validators } from '@angular/forms';
+import {  Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { ClientEditModalComponent } from 'src/app/components/client-edit-modal/client-edit-modal.component';
-
 
 @Component({
   selector: 'app-dashboard',
@@ -15,30 +13,14 @@ import { ClientEditModalComponent } from 'src/app/components/client-edit-modal/c
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  @Output() public emmitSearch: EventEmitter<string> = new EventEmitter();
+
   public modalRef?: BsModalRef;
-  public zipCode?: number;
-  public street?: string;
-  public district?: string;
-  public locality?: string;
-  public phone?: string;
-
-  public form = new FormGroup({
-    zipCode: new FormControl(''),
-    full_name: new FormControl(),
-    email: new FormControl(),
-    street: new FormControl(),
-    district: new FormControl(),
-    locality: new FormControl(),
-    description: new FormControl(),
-    phone: new FormControl(),
-  })
-
   formValid: boolean = false
 
   constructor(
     private modalService: BsModalService,
     public route: Router,
-    private routes: ActivatedRoute,
     private authService: AuthenticationService,
     private ClientService: ClientService,
   ) { }
@@ -50,32 +32,17 @@ export class DashboardComponent implements OnInit {
     this.list = await this.ClientService.list()
   }
 
-  openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template,
+  public search(value: ClientInterface | any) {
+    this.emmitSearch.emit(value)
+  }
+
+  openCreateModal() {
+    this.modalRef = this.modalService.show(ClientCreateModalComponent,
       { class: 'modal-lg modal-dialog-centered',
         ignoreBackdropClick: false,
         keyboard: false
-      });  }
-
-
-  async onSubmit() {
-    console.log(this.form);
-    
-    if (this.form.valid) {
-      try {
-        await this.ClientService.createClient(this.form.value)
-        this.route.navigate(["/dashboard"])
-      } catch (error) {
-        console.log(error)
-      }
-    } else {
-      this.formValid = true
+      });
     }
-    await this.ngOnInit()
-
-    
-  }
-
 
   openEditModel(client: ClientInterface) {
     this.modalRef = this.modalService.show(ClientEditModalComponent, {
@@ -91,49 +58,10 @@ export class DashboardComponent implements OnInit {
     this.route.navigate([""])
   }
 
-
-
-  async findZipCode(value: number) {
-    if(String(value).length == 8) {
-
-      let address = await this.ClientService.cep(value);
-      this.form.controls['street'].setValue(address.logradouro);
-      this.form.controls['district'].setValue(address.bairro);
-      this.form.controls['locality'].setValue(address.localidade);
-      this.form.controls['phone'].setValue(address.ddd);
-
-      console.log(this.form.value)
-      console.log(this.form)
-      //console.log(address)
-    }
-  }
-    /*
-  searchCep(cep: string) {
-
-    cep = cep.replace(/\D/g, '')
-    if(cep != '') {
-      const cepValid = /^[0-9]{8}$/;
-
-      if(cepValid.test(cep)) {
-        this.ClientService.cep(cep).then((data) => this.FormFunc(data, ''))
-      }else {
-        console.log('deu ruim')
-      }
-    }
-
-   
+  async deleteClient(client: ClientInterface | any) {
+    await this.ClientService.deleteClient(client.id);
+    window.location.reload()
   }
 
-  FormFunc(data: string | any, form: any) {
-    form.setValue({
-      rua: data.rua,
-      bairro: data.bairro,
-      UF: data.localidade,
-      ddd: data.ddd,
-      cep: data.cep
-    })
-
-  }
- */
 }
 
