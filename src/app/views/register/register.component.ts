@@ -35,7 +35,7 @@ export class RegisterComponent implements OnInit {
       try {
         let response = await this.registerService.createUser(this.registerForm.value)
         this.authService.storeToken(response);
-        this.route.navigate(['/dashboard'])
+        this.route.navigate(['/dashboard/home'])
       } catch(error) {
         console.log(error)
       }

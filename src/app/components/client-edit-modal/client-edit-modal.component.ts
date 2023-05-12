@@ -49,11 +49,28 @@ export class ClientEditModalComponent implements OnInit {
 
     async ngOnInit() {
       this.client = await this.clientService.readById(this.client_id)
+
+      this.form.patchValue({
+        zip_code: this.client.zip_code,
+        full_name: this.client.full_name,
+        email: this.client.email,
+        street: this.client.street,
+        district: this.client.district,
+        locality: this.client.locality,
+        description: this.client.description,
+        phone: this.client.phone, 
+      })
     }
 
-  async updateClient(): Promise<void> {
-    await this.clientService.updateClient(this.client, this.client_id);
-    window.location.reload()
+  async updateClient() {
+    if(this.form.valid) {
+      try {
+        await this.clientService.updateClient(this.form.value, this.client_id);
+        window.location.reload()
+      } catch (error) {
+        console.log(error)
+      }
+    }
   }
 
   async findZipCode(value: number) {

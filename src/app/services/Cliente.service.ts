@@ -13,8 +13,13 @@ export class ClientService {
 
   url = 'http://localhost:3000/'
 
-  public async list(): Promise<ClientInterface[]> {
-    return firstValueFrom(this.http.get<ClientInterface[]>(`${this.url}client`))
+  async loadUser() {
+    const request =  await firstValueFrom(this.http.get<ClientInterface>(`${this.url}whoami`))
+    return request
+  }
+
+  public async list(limit?: number | any, page?: number, full_name?: string, email?: string, street?: string, district?: string, zip_code?: number | any, description?: string, phone?: number | any) {
+    return firstValueFrom(this.http.get<ClientInterface[]>(`${this.url}client?limit=${limit}&page=${page}&full_name=${full_name}&email=${email}&street=${street}&district=${district}&zip_code=${zip_code}&description=${description}&phone=${phone}`))
   }
 
   public async readById(id: number | any): Promise<ClientInterface> {

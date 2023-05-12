@@ -1,0 +1,59 @@
+<div class="body">
+  <div class="container">
+    <div class="card-header w-100 d-flex justify-content-between">
+      <div class="start-card">
+        <span>Usuários</span>
+      </div>
+      <div class="start-card dropdown">
+        <div class="dropdown show">
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <Button type="button" class="btn btn_register_client" (click)="openCreateModal()"><i
+                class="bi bi-plus">Adicionar</i></Button>
+
+            <div class="dropdown-divider"></div>
+
+            <a class="dropdown-item" (click)="Filter()">Filtrar</a>
+          </div>
+        </div>
+
+        <a class="menu-a-btn " role="button" id="dropdownMenuLink" data-toggle="dropdown">
+          <i class="bi bi-three-dots-vertical menu-card-icon"></i>
+        </a>
+      </div>
+    </div>
+    <div class="card table-resonsive">
+      <table class="table table-striped m-0">
+        <thead>
+          <tr style="background-color: black; color: white;">
+            <th class="text-left">Nome</th>
+            <th class="text-left">Email</th>
+            <th class="text-left street">Rua</th>
+            <th class="text-left street">Bairro</th>
+            <th class="text-left street">Cep</th>
+            <th class="text-left street">Referencia</th>
+            <th class="text-left phone">Telefone</th>
+            <th class="text-left"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="tr-click" *ngFor="let item of data.data">
+            <td class="text-left">{{item.full_name}}</td>
+            <td class="text-left">{{item.email}}</td>
+            <td class="text-left street">{{item.street}}</td>
+            <td class="text-left">{{item.district}}</td>
+            <td class="text-left">{{item.zip_code}}</td>
+            <td class="text-left street">{{item.description}}</td>
+            <td class="text-left phone">{{item.phone}}</td>
+            <td class="text-left">
+              <a class="btn-icons" (click)="openEditModel(item)"><i class="bi bi-pencil" style="color: black;"></i></a>
+              <a class="btn-icons" (click)="deleteClient(item)"><i class="bi bi-trash" style="color: black;"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <mat-paginator class="paginate" #paginator (page)="list($event)" [pageSizeOptions]="[5, 10, 25]"
+      [showFirstLastButtons]="true">
+    </mat-paginator>
+  </div>
+</div>

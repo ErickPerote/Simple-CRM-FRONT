@@ -1,0 +1,10 @@
+.navbar {
+    padding-left: 20px;
+}
+
+.btn_logout {
+    padding-right: 3rem;
+    background-color: transparent; 
+    color: white;
+    border: none;   
+  }

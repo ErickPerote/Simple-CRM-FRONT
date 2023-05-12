@@ -7,61 +7,62 @@
           <span aria-hidden="true">×</span>
         </button>
       </div>
-      <form class="modal-body"  (ngSubmit)="updateClient()">
+      <form class="modal-body" [formGroup]="form"  (ngSubmit)="updateClient()">
+
+        <div class="form-group row mt-4">
+          <label for="inputNome" class="col-sm-2 col-form-label">Nome</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="full_name" formControlName="full_name" id="inputNome" placeholder="Nome">
+          </div>
+        </div>
+
         <div class=" form_container">
           <div class="form-group row  mt-2">
             <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
             <div class="col-sm-10">
-              <input type="email" class="form-control" name="email" [(ngModel)]="client.email" id="inputEmail" placeholder="Email">
-            </div>
-          </div>
-
-          <div class="form-group row mt-4">
-            <label for="inputNome" class="col-sm-2 col-form-label">Nome</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" name="full_name" [(ngModel)]="client.full_name" id="inputNome" placeholder="Nome">
+              <input type="email" class="form-control" name="email" formControlName="email" id="inputEmail" placeholder="Email">
             </div>
           </div>
 
           <div class="form-group row mt-4">
             <label for="inputCep" class="col-sm-2 col-form-label">Cep</label>
             <div class="col-sm-10">
-              <input type="number" name="zip_code" id="inputCep"  [ngModel]="zip_code" (ngModelChange)="findZipCode($event)" class="form-control" placeholder="Cep">
+              <input type="number" name="zip_code" id="inputCep" formControlName="zip_code" class="form-control" placeholder="Cep">
             </div>
           </div>
 
           <div class="form-group row mt-4">
             <label for="inputPhone" class="col-sm-2 col-form-label">Telefone</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="phone" [ngModel]="phone"  id="inputPhone" placeholder="Telefone">
+              <input type="text" class="form-control" name="phone" formControlName="phone"  id="inputPhone" placeholder="Telefone" mask="(00)0 0000-0000">
             </div>
           </div>
 
           <div class="form-group row mt-4">
             <label for="inputBairro" class="col-sm-2 col-form-label">Bairro</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="district"  [ngModel]="district" id="inputBairro" placeholder="Bairro">
+              <input type="text" class="form-control" name="district"  formControlName="district" id="inputBairro" placeholder="Bairro">
             </div>
           </div>
 
           <div class="form-group row mt-4">
             <label for="inputRua" class="col-sm-2 col-form-label">Rua</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="street"   [ngModel]="street"  id="inputRua" placeholder="Rua">
+              <input type="text" class="form-control" name="street"   formControlName="street"  id="inputRua" placeholder="Rua">
             </div>
           </div>
 
           <div class="form-group row mt-4">
             <label for="inputUF" class="col-sm-2 col-form-label">UF</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="locality" [ngModel]="locality" id="inputUF" placeholder="UF">
+              <input type="text" class="form-control" name="locality" formControlName="locality" id="inputUF" placeholder="UF">
             </div>
           </div>
 
           <div class="form-group row mt-4">
             <label for="inputDescição" class="col-sm-2 col-form-label">Descição</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="description" [(ngModel)]="client.description" id="inputDescição" placeholder="Descição">
+              <input type="text" class="form-control" name="description" formControlName="description" id="inputDescição" placeholder="Descição">
             </div>
           </div>
 

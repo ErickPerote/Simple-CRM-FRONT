@@ -1,0 +1,50 @@
+<div class="header">
+    Filtrar Usuários
+
+    <button (click)="close()" class="header-dropdown btn btn-light p-3 close-card-btn">
+        <i class="bi bi-x"></i>
+    </button>
+
+</div>
+
+<div class="card-body row m-0">
+    <div class="col-xl-6 mb-3">
+        <label for="name" class="form-label">Nome:</label>
+        <input type="text" class="form-control" id="full_name" name="full_name">
+    </div>
+
+    <div class="col-xl-6 mb-3">
+        <label for="email" class="form-label">Email:</label>
+        <input type="email" class="form-control" id="email" name="email">
+    </div>
+
+    <div class="col-xl-6 mb-3">
+        <label for="street" class="form-label">Rua:</label>
+        <input type="text" class="form-control" id="street" name="street">
+    </div>
+
+    <div class="col-xl-6 mb-3">
+        <label for="district" class="form-label">Bairro:</label>
+        <input type="text" class="form-control" id="district" name="district">
+    </div>
+
+    <div class="col-xl-6 mb-3">
+        <label for="zip_code" class="form-label">CEP:</label>
+        <input type="number" class="form-control" id="zip_code" name="zip_code">
+    </div>
+
+    <div class="col-xl-6 mb-3">
+        <label for="description" class="form-label">Referência:</label>
+        <input type="text" class="form-control" id="description" name="description">
+    </div>
+
+    <div class="col-xl-6 mb-3">
+        <label for="phone" class="form-label">Telefone:</label>
+        <input type="number" class="form-control" id="phone" name="phone">
+    </div>
+
+</div>
+
+<div class="card-footer">
+    <button type="button" class="btn btn-primary" (click)="filter()">Filtrar</button>
+</div>

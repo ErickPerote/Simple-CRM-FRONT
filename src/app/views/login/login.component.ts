@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
       try {
         let response = await this.authService.login(this.loginForm.value);
         this.authService.storeToken(response);
-        this.route.navigate(["/dashboard"])
+        this.route.navigate(["/dashboard/home"])
       } catch (error) {
         this.isFailed = true
       }
