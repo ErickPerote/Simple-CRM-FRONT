@@ -2,7 +2,7 @@ import { CepInterface } from './../../interface/Cep';
 import { ClientInterface } from './../../interface/Client';
 import { ClientService } from './../../services/Cliente.service';
 import { Component, OnInit } from '@angular/core';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import {  Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 
@@ -36,6 +36,7 @@ export class ClientCreateModalComponent implements OnInit {
   constructor(
     public route: Router,
     private ClientService: ClientService,
+    private modalService: BsModalService,
   ) { }
 
   list?: ClientInterface[]
@@ -49,7 +50,7 @@ export class ClientCreateModalComponent implements OnInit {
     if (this.form.valid) {
       try {
         await this.ClientService.createClient(this.form.value)
-        window.location.reload()
+        this.modalService.hide();
       } catch (error) {
         console.log(error)
       }

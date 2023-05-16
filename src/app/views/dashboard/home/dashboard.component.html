@@ -2,21 +2,26 @@
   <div class="container">
     <div class="card-header w-100 d-flex justify-content-between">
       <div class="start-card">
-        <span>Usuários</span>
+        <span class="m-3">Usuários</span>
       </div>
-      <div class="start-card dropdown">
+      <div class="start-card dropdown dropleft">
         <div class="dropdown show">
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <Button type="button" class="btn btn_register_client" (click)="openCreateModal()"><i
-                class="bi bi-plus">Adicionar</i></Button>
+            <Button type="button" class="btn btn_register_client" (click)="openCreateModal()">
+              <i class="bi bi-plus"></i>
+              Adicionar
+            </Button>
 
             <div class="dropdown-divider"></div>
 
-            <a class="dropdown-item" (click)="Filter()">Filtrar</a>
+            <Button type="button" class="btn btn_register_client" (click)="Filter()">
+              <i class="bi bi-filter"></i>
+              Filtrar
+            </Button>
           </div>
         </div>
 
-        <a class="menu-a-btn " role="button" id="dropdownMenuLink" data-toggle="dropdown">
+        <a class="menu-a-btn" role="button" id="dropdownMenuLink" data-toggle="dropdown">
           <i class="bi bi-three-dots-vertical menu-card-icon"></i>
         </a>
       </div>

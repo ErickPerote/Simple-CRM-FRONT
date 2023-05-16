@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import {  Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ClientService } from 'src/app/services/Cliente.service';
 import { ClientInterface } from 'src/app/interface/Client';
 import { ClientCreateModalComponent } from 'src/app/components/client-create-modal/client-create-modal.component';
@@ -8,6 +8,7 @@ import { ClientEditModalComponent } from 'src/app/components/client-edit-modal/c
 import { USERFilterComponent } from '../filter/filter.component';
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from "@angular/material/dialog";
+import { subscribeOn } from 'rxjs';
 
 
 @Component({
@@ -20,22 +21,22 @@ export class DashboardComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator | any;
 
   public modalRef?: BsModalRef;
-  data: any = { data: [], total: 0 };  client!:  ClientInterface
+
+  data: any = { data: [], total: 0 }; client!: ClientInterface
+  currentPageIndex: number = 0;
+  searchParams: { full_name: string, email: string, street: string, district: string, zip_code: any, description: string, phone: any, };
   pageEvent: PageEvent = {
     pageIndex: 0,
     pageSize: 10,
     length: 0,
     previousPageIndex: 0
   };
-  searchParams: { full_name: string, email: string, street: string, district: string, zip_code: any, description: string,  phone: any,  };
-
 
   constructor(
     private modalService: BsModalService,
     public route: Router,
-    private dialogModel: MatDialog,
     private ClientService: ClientService,
-  ) { 
+  ) {
     this.searchParams = { full_name: '', email: '', street: '', district: '', zip_code: '', description: '', phone: '' }
   }
 
@@ -65,7 +66,7 @@ export class DashboardComponent implements OnInit {
 
   async list(event: any) {
     const limit = event.pageSize;
-    const page = event.pageIndex  
+    const page = event.pageIndex
     const name = this.searchParams.full_name
     const email = this.searchParams.email
     const street = this.searchParams.street
@@ -80,7 +81,13 @@ export class DashboardComponent implements OnInit {
   }
 
   Filter() {
-    this.modalRef = this.modalService.show(USERFilterComponent);
+    this.modalRef = this.modalService.show(USERFilterComponent,
+      {
+        class: 'modal-lg modal-dialog-centered',
+        ignoreBackdropClick: false,
+        keyboard: false
+      });
+
     this.modalRef.content?.filterEvent.subscribe((values: any) => {
       this.searchParams = values
       this.ngOnInit()
@@ -88,25 +95,45 @@ export class DashboardComponent implements OnInit {
   }
 
   openCreateModal() {
+    this.currentPageIndex = this.paginator.pageIndex;
     this.modalRef = this.modalService.show(ClientCreateModalComponent,
-      { class: 'modal-lg modal-dialog-centered',
+      {
+        class: 'modal-lg modal-dialog-centered',
         ignoreBackdropClick: false,
         keyboard: false
       });
-    }
+
+    this.modalRef.onHide?.subscribe(async () => {
+      await this.list({ pageIndex: this.currentPageIndex, pageSize: this.paginator.pageSize, length: this.paginator.length });
+    })
+  }
 
   openEditModel(client: ClientInterface) {
+    this.currentPageIndex = this.paginator.pageIndex;
+
     this.modalRef = this.modalService.show(ClientEditModalComponent, {
       initialState: { client_id: client.id },
       class: 'modal-lg modal-dialog-centered',
       ignoreBackdropClick: false,
       keyboard: false
     });
+
+    this.modalRef.onHide?.subscribe(async () => {
+      await this.list({ pageIndex: this.currentPageIndex, pageSize: this.paginator.pageSize, length: this.paginator.length });
+    })
   }
 
   async deleteClient(client: ClientInterface | any) {
-    await this.ClientService.deleteClient(client.id);
-    window.location.reload()
+    this.currentPageIndex = this.paginator.pageIndex;
+
+    try {
+      if(confirm()) {
+        await this.ClientService.deleteClient(client.id);
+      }
+      await this.list({ pageIndex: this.currentPageIndex, pageSize: this.paginator.pageSize, length: this.paginator.length });
+    } catch (error) {
+      
+    }
   }
 
 }

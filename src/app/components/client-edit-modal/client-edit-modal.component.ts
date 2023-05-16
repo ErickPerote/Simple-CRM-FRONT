@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ClientInterface } from 'src/app/interface/Client';
 import { ClientService } from 'src/app/services/Cliente.service';
 
@@ -44,7 +44,8 @@ export class ClientEditModalComponent implements OnInit {
   client_id?: number;
 
   constructor(
-    private clientService: ClientService
+    private clientService: ClientService,
+    private modalService: BsModalService,
     ) { }
 
     async ngOnInit() {
@@ -66,7 +67,7 @@ export class ClientEditModalComponent implements OnInit {
     if(this.form.valid) {
       try {
         await this.clientService.updateClient(this.form.value, this.client_id);
-        window.location.reload()
+        this.modalService.hide()
       } catch (error) {
         console.log(error)
       }
